@@ -3,6 +3,7 @@ class View {
     this.game = game;
     this.el = el;
     this.setupBoard();
+
   }
 
   setupBoard() {
@@ -15,15 +16,61 @@ class View {
       }
     }
     this.el.append(ul);
+
+    this.el.addEventListener("click", this.handleClick);
   }
 
-  handleClick(e) {
+  handleClick = (e) => {
+    const el = e.target;
+
+    if(el.nodeName === "LI") {
+      this.makeMove(el);
+    }
+
+    console.log("handling click");
+
+
   }
 
   makeMove(square) {
+
+    const pos = JSON.parse(square.dataset.pos); 
+
+    console.log("making move");
+    const currentPlayer = this.game.currentPlayer;
+
+
+    try {
+      this.game.playMove(pos);
+    } catch(error) {
+      alert("Invalid move!!");
+    }
+
+    square.classList.add(currentPlayer);
+
+
+
+
+    if (this.game.isOver()) this.handleGameOver();
+
+
   }
 
   handleGameOver() {
+
+      const winner = this.game.winner(); 
+      const notify = document.createElement("p");
+      if(winner) {
+        notify.append(`Winner is ${winner}`);
+      } else {
+        notify.append("draw");
+      }
+
+      this.el.append(notify);
+
+
+
+
   }
 }
 

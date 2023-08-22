@@ -11,8 +11,36 @@ li{
     border: 1px solid black;
     background-color: grey;
     list-style: none;
+    cursor: pointer;
 }
 
 li:hover{
     background-color: yellow;
+}
+
+
+
+
+
+.x:hover,
+.o:hover {
+    background: white;
+}
+
+
+.x:after {
+    content: 'x';
+}
+
+.o:after{
+    content: 'o';
+}
+
+
+.x:after,
+.o:after {
+    display:block;
+    width: 100%;
+    font-size: 60px;
+    line-height: 80px;
 }
